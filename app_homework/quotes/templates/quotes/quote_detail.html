@@ -1,0 +1,32 @@
+{% extends 'quotes/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        {% for quote in quotes %}
+        <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+            <h1><span class="text" itemprop="text">{{quote.quote}}</span></h1>
+            <span>by
+                {% for author in authors %}
+                    {% if quote.author == author %}
+                        <small class="author" itemprop="author">{{author.fullname}}</small>
+                    {% endif %}
+                {% endfor %}
+                <a href="{% url 'quotes:author_detail' quote.author.id %}">(about)</a>
+            </span>
+            <div class="tags">
+                Tags:
+                {% for tag in quote.tags.all %}
+                    <a class="tag" href="{% url 'quotes:tag_info' tag.id %}">{{tag.tag}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        <nav>
+            <ul class="pager">
+            <!-- Здесь можете добавить пагинацию, если это необходимо -->
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

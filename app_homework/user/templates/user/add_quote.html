@@ -1,0 +1,28 @@
+{% extends 'quotes/base.html' %}
+
+{% block content %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<form method="post" action="">
+    {% csrf_token %}
+    <div class="mb-3">
+        <h3>Please fill the forms</h3>
+        <label for="exampleFormControlInput1" class="form-label"></label>
+        {{author_form}}
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">tags</label>
+        {{quote_form.tags}}
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Quote</label>
+        {{quote_form.quote}}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

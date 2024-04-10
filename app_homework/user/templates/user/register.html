@@ -1,0 +1,45 @@
+{% extends 'quotes/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Register User</h2>
+    {% if form.errors and form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ form.non_field_errors }}
+    </div>
+    {% endif %}
+    <form method="post" action="{% url 'user:Registration'%}">
+        {% csrf_token %}
+        <input type="hidden" name="csrf_token" value="eoKPuBICAzHXfMrYnkgUNbaZcFlOTpxymdSjQtvVLhWRDEqJsGwi">
+        <div class="row">
+            <div class="form-group col-xs-3">
+                <label for="username">Username{{form.username}}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <label> Email:
+                    {{ form.email }}
+                </label>
+                <span>{{ form.errors.email }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-3">
+                <label for="password1">Enter password{{form.password1}}</label>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-3">
+                <label for="password2">Repeat password{{form.password2}}</label>
+
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 3px;">Register</button>
+
+    </form>
+
+
+</div>
+{% endblock %}
